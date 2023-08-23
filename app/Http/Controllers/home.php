@@ -4,13 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use App\Charts\ChartFakultas;
 use DB;
 
 class home extends Controller
 {
 
-    public function home(){
+    public function home(Request $request){
         // Query Jumlah Fakultas
         $jm_fakultas = DB::table('wisudawan_datas')
                     ->select(DB::raw('kode_fak, count(kode_fak) as jumlah_fak'))
@@ -87,12 +88,25 @@ class home extends Controller
             $result_join_jurusan_S2[] = $val->nama_jurusan;
             $result_join_jumlah_S2[] = $val->jumlah_mahasiswa;
         }
-       
-        return view('home', compact('fakultas_result', 'result_jumlah', 'result_join_jurusan', 'result_join_jumlah', 'result_join_jurusan_S2', 'result_join_jumlah_S2'));
+
+
+        if(!Gate::allows('read role')){
+            return redirect('login');
+        }
+
+        $acc_name = $request->user()->name;
+        $acc_email = $request->user()->email;
+        $role_name = $request->user()->getRoleNames();
+        
+        return view('home', compact('fakultas_result', 'result_jumlah', 'result_join_jurusan', 'result_join_jumlah', 'result_join_jurusan_S2', 'result_join_jumlah_S2', 'acc_name', 'acc_email', 'role_name'));
     }
 
     public function welcome(){
         // dd($request->user()->hasRole('admin'));
         return view('welcome');
+    }
+
+    public function not_found(){
+        return view('not_found');
     }
 }

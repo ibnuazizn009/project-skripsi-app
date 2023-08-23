@@ -2,7 +2,8 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Dashboard</title>
+    <title>Periode Page</title>
+    <link rel="icon" href="{{ asset('images/icon_title.png')}}" type="image/x-icon">
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <!-- Bootstrap 3.3.2 -->
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
@@ -24,7 +25,7 @@
     <link href="{{ asset('dist/css/skins/_all-skins.min.css')}}" rel="stylesheet" type="text/css" />
     <!-- Table Scrollable-->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" href="{{ asset('css/table_style.js')}}">
+    <link rel="stylesheet" href="{{ asset('css/table_style.css')}}">
 </head>
 
 <body class="skin-blue">
@@ -68,7 +69,7 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <img src="{{ asset('dist/img/avatar-not-found 160x160.jpeg')}}" class="user-image"
                                     alt="User Image" />
-                                <span class="hidden-xs">Sri Desi Mulyani</span>
+                                <span class="hidden-xs">{{$acc_name}}</span>
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- User image -->
@@ -76,8 +77,8 @@
                                     <img src="{{ asset('dist/img/avatar-not-found 160x160.jpeg')}}" class="img-circle"
                                         alt="User Image" />
                                     <p>
-                                        Sri Desi Mulyani - Web Developer
-                                        <small>Member since Nov. 2012</small>
+                                        {{$acc_name}} - {{$acc_email}}
+                                        <small>Role: {{$role_name[0]}}</small>
                                     </p>
                                 </li>
                                 <!-- Menu Body -->
@@ -95,7 +96,7 @@
                                 <!-- Menu Footer-->
                                 <li class="user-footer">
                                     <div class="pull-left">
-                                        <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                        <a href="/404-not-found" class="btn btn-default btn-flat">Profile</a>
                                     </div>
                                     <div class="pull-right">
                                         <a href="/logout" class="btn btn-default btn-flat">Sign out</a>
@@ -117,9 +118,9 @@
                         <img src="{{ asset('dist/img/avatar-not-found 160x160.jpeg')}}" class="img-circle" alt="User Image" />
                     </div>
                     <div class="pull-left info">
-                        <p>Sri Desi Mulyani</p>
+                        <p>{{$acc_name}}</p>
 
-                        <a href="#"><i class="fa fa-circle text-danger"></i> Offline</a>
+                        <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                     </div>
                 </div>
                 <ul class="sidebar-menu">
@@ -205,16 +206,16 @@
                         <div class="box">
                             <div class="box-header with-border" style="margin-left: 10px;">
                             @can('create role')
-                               <a href="/periode/add" class="btn btn-sm btn-success" style="padding: 8px;"> Tambah Data </a>
+                               <a href="/periode/add" class="btn btn-sm btn-success" style="padding: 8px;"><b> Tambah Data </b></a>
                             @endcan
                             </div><!-- /.box-header -->
                             <div class="box-body">
                                 <div class="row">
                                     <div class="dataTables_wrapper">
                                         <table id="dtHorizontalVerticalExample"
-                                            class="table table-striped table-bordered table-sm display nowrap" cellspacing="0"
+                                            class="dataTable display compact hover nowrap table-bordered order-column row-border stripe" cellspacing="0"
                                             width="100%">
-                                            <thead>
+                                            <thead style="font-size: 14px">
                                                 <tr>
                                                     <th>Idx</th>
                                                     <th>ID Periode</th>
@@ -232,7 +233,7 @@
                                                     <th>AKSI</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
+                                            <tbody style="font-size: 14px">
                                                 @foreach($periode as $pd)
                                                     <tr>
                                                         <td>{{$pd->idx}}</td>
@@ -252,8 +253,8 @@
                                                             @can(['update role', 'delete role'])
                                                             <form onsubmit=""
                                                                 method="POST">
-                                                                <a href="/periode/edit/{{$pd->idx}}" class="btn btn-sm btn-primary">EDIT</a>
-                                                                <a href="/periode/delete/{{$pd->idx}}" class="btn btn-sm btn-danger">HAPUS</a>
+                                                                <a href="/periode/edit/{{$pd->idx}}" class="btn btn-sm btn-primary"><b>EDIT</b></a>
+                                                                <a href="/periode/delete/{{$pd->idx}}" class="btn btn-sm btn-danger"><b>HAPUS</b></a>
                                                                 
                                                             </form>
                                                             @endcan

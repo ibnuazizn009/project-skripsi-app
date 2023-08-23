@@ -8,14 +8,20 @@ use App\Models\wisuda_data_periode;
 
 class periode_controller extends Controller
 {
-    public function periode(){
+    public function periode(Request $request){
+        $acc_name = $request->user()->name;
+        $acc_email = $request->user()->email;
+        $role_name = $request->user()->getRoleNames();
         $periode=wisuda_data_periode::all();
         // dd($periode);
-        return view('periode', compact('periode'));
+        return view('periode', compact('periode', 'acc_name', 'acc_email', 'role_name'));
     }
 
-    public function tambah(){
-        return view('tambah_periode');
+    public function tambah(Request $request){
+        $acc_name = $request->user()->name;
+        $acc_email = $request->user()->email;
+        $role_name = $request->user()->getRoleNames();
+        return view('tambah_periode', compact('acc_name', 'acc_email', 'role_name'));
     }
 
     public function tambah_periode(Request $request){
@@ -47,9 +53,12 @@ class periode_controller extends Controller
        
     }
 
-    public function edit_periode($idx){
+    public function edit_periode($idx, Request $request){
+        $acc_name = $request->user()->name;
+        $acc_email = $request->user()->email;
+        $role_name = $request->user()->getRoleNames();
         $periode = wisuda_data_periode::where('idx', $idx)->get();
-        return view('edit_periode', compact('periode'));
+        return view('edit_periode', compact('periode', 'acc_name', 'acc_email', 'role_name'));
     }
 
     public function update_periode(int $idx, Request $request){

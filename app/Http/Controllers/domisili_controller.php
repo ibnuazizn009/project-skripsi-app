@@ -8,14 +8,20 @@ use App\Models\wisuda_status_domisili;
 
 class domisili_controller extends Controller
 {
-    public function status_domisili(){
+    public function status_domisili(Request $request){
+        $acc_name = $request->user()->name;
+        $acc_email = $request->user()->email;
+        $role_name = $request->user()->getRoleNames();
         $domisili=wisuda_status_domisili::all();
         // dd($domisili);
-        return view('status_domisili', compact('domisili'));
+        return view('status_domisili', compact('domisili', 'acc_name', 'acc_email', 'role_name'));
     }
 
-    public function tambah(){
-        return view('tambah_domisili');
+    public function tambah(Request $request){
+        $acc_name = $request->user()->name;
+        $acc_email = $request->user()->email;
+        $role_name = $request->user()->getRoleNames();
+        return view('tambah_domisili', compact('acc_name', 'acc_email', 'role_name'));
     }
 
     public function tambah_domisili(Request $request){
@@ -36,9 +42,12 @@ class domisili_controller extends Controller
        
     }
 
-    public function edit_domisili($idx){
+    public function edit_domisili($idx, Request $request){
+        $acc_name = $request->user()->name;
+        $acc_email = $request->user()->email;
+        $role_name = $request->user()->getRoleNames();
         $domisili = wisuda_status_domisili::where('idx', $idx)->get();
-        return view('edit_domisili', compact('domisili'));
+        return view('edit_domisili', compact('domisili', 'acc_name', 'acc_email', 'role_name'));
     }
 
     public function update_domisili(int $idx, Request $request){

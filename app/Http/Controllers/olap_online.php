@@ -8,8 +8,10 @@ use DB;
 class olap_online extends Controller
 {
     //
-    public function olap_online(){
-
+    public function olap_online(Request $request){
+        $acc_name = $request->user()->name;
+        $acc_email = $request->user()->email;
+        $role_name = $request->user()->getRoleNames();
                             
         $predikat_by_jurusan = DB::table('view_prodi_jenjangs')
                             ->leftJoin('wisudawan_datas', 'view_prodi_jenjangs.kode_jur', '=', 'wisudawan_datas.kode_jur')
@@ -50,7 +52,7 @@ class olap_online extends Controller
         }
 
         // dd($by_jumlah_fakultas_cukup);
-        return view('olap_data', compact('by_nama_jurusan', 'by_jumlah_jurusan_memuaskan', 'by_jumlah_jurusan_cukup', 'by_nama_fakultas', 'by_jumlah_fakultas_memuaskan', 'by_jumlah_fakultas_cukup'));
+        return view('olap_data', compact('by_nama_jurusan', 'by_jumlah_jurusan_memuaskan', 'by_jumlah_jurusan_cukup', 'by_nama_fakultas', 'by_jumlah_fakultas_memuaskan', 'by_jumlah_fakultas_cukup', 'acc_name', 'acc_email', 'role_name'));
                         
     }
 }

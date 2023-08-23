@@ -8,14 +8,20 @@ use App\Models\wisuda_jenis_pekerjaan;
 
 class pekerjaan_controller extends Controller
 {
-    public function status_pekerjaan(){
+    public function status_pekerjaan(Request $request){
+        $acc_name = $request->user()->name;
+        $acc_email = $request->user()->email;
+        $role_name = $request->user()->getRoleNames();
         $pekerjaan=wisuda_jenis_pekerjaan::all();
         // dd($pekerjaan);
-        return view('status_pekerjaan', compact('pekerjaan'));
+        return view('status_pekerjaan', compact('pekerjaan', 'acc_name', 'acc_email', 'role_name'));
     }
 
-    public function tambah(){
-        return view('tambah_pekerjaan');
+    public function tambah(Request $request){
+        $acc_name = $request->user()->name;
+        $acc_email = $request->user()->email;
+        $role_name = $request->user()->getRoleNames();
+        return view('tambah_pekerjaan', compact('acc_name', 'acc_email', 'role_name'));
     }
 
     public function tambah_pekerjaan(Request $request){
@@ -36,9 +42,12 @@ class pekerjaan_controller extends Controller
        
     }
 
-    public function edit_pekerjaan($idx){
+    public function edit_pekerjaan($idx, Request $request){
+        $acc_name = $request->user()->name;
+        $acc_email = $request->user()->email;
+        $role_name = $request->user()->getRoleNames();
         $pekerjaan = wisuda_jenis_pekerjaan::where('idx', $idx)->get();
-        return view('edit_pekerjaan', compact('pekerjaan'));
+        return view('edit_pekerjaan', compact('pekerjaan', 'acc_name', 'acc_email', 'role_name'));
     }
 
     public function update_pekerjaan(int $idx, Request $request){

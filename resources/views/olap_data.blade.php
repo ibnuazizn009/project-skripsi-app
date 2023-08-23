@@ -2,7 +2,8 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Dashboard</title>
+    <title>OLAP - Online Page</title>
+    <link rel="icon" href="{{ asset('images/icon_title.png')}}" type="image/x-icon">
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <!-- Bootstrap 3.3.2 -->
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
@@ -77,7 +78,7 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <img src="{{ asset('dist/img/avatar-not-found 160x160.jpeg')}}" class="user-image"
                                     alt="User Image" />
-                                <span class="hidden-xs">Sri Desi Mulyani</span>
+                                <span class="hidden-xs">{{$acc_name}}</span>
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- User image -->
@@ -85,8 +86,8 @@
                                     <img src="{{ asset('dist/img/avatar-not-found 160x160.jpeg')}}" class="img-circle"
                                         alt="User Image" />
                                     <p>
-                                        Sri Desi Mulyani - Web Developer
-                                        <small>Member since Nov. 2012</small>
+                                        {{$acc_name}} - {{$acc_email}}
+                                        <small>Role: {{$role_name[0]}}</small>
                                     </p>
                                 </li>
                                 <!-- Menu Body -->
@@ -104,10 +105,10 @@
                                 <!-- Menu Footer-->
                                 <li class="user-footer">
                                     <div class="pull-left">
-                                        <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                        <a href="/404-not-found" class="btn btn-default btn-flat">Profile</a>
                                     </div>
                                     <div class="pull-right">
-                                        <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                                        <a href="/logout" class="btn btn-default btn-flat">Sign out</a>
                                     </div>
                                 </li>
                             </ul>
@@ -126,9 +127,9 @@
                         <img src="{{ asset('dist/img/avatar-not-found 160x160.jpeg')}}" class="img-circle" alt="User Image" />
                     </div>
                     <div class="pull-left info">
-                        <p>Sri Desi Mulyani</p>
+                        <p>{{$acc_name}}</p>
 
-                        <a href="#"><i class="fa fa-circle text-danger"></i> Offline</a>
+                        <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                     </div>
                 </div>
                 <!-- search form -->

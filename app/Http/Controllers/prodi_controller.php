@@ -8,13 +8,19 @@ use App\Models\view_prodi_jenjang;
 
 class prodi_controller extends Controller
 {
-    public function prodi(){
+    public function prodi(Request $request){
+        $acc_name = $request->user()->name;
+        $acc_email = $request->user()->email;
+        $role_name = $request->user()->getRoleNames();
         $prodi=view_prodi_jenjang::all();
-        return view('prodi', compact('prodi'));
+        return view('prodi', compact('prodi', 'acc_name', 'acc_email', 'role_name'));
     }
 
-    public function tambah(){
-        return view('tambah_prodi');
+    public function tambah(Request $request){
+        $acc_name = $request->user()->name;
+        $acc_email = $request->user()->email;
+        $role_name = $request->user()->getRoleNames();
+        return view('tambah_prodi', compact('acc_name', 'acc_email', 'role_name'));
     }
 
     public function tambah_prodi(Request $request){
@@ -45,9 +51,27 @@ class prodi_controller extends Controller
        
     }
 
-    public function edit_prodi($dikti){
+    public function edit_prodi(Request $request, $dikti = null){
+        $acc_name = $request->user()->name;
+        $acc_email = $request->user()->email;
+        $role_name = $request->user()->getRoleNames();
         $prodi = view_prodi_jenjang::where('kode_dikti', $dikti)->get();
-        return view('edit_prodi', compact('prodi'));
+
+        $kode_dikti = [];
+        foreach($prodi as $key=>$val){
+            $kode_dikti[]=$val->kode_dikti;
+        }
+
+        if($dikti != NULL || $dikti != ''){
+            return view('edit_prodi', compact('prodi', 'acc_name', 'acc_email', 'role_name'));
+            
+        }else{
+            session()->flash('message_notFound', ' Kode Dikti Tidak di Temukan');
+            return redirect('prodi');
+        }
+        // dd($kode_dikti[0]);
+        
+       
     }
 
     public function update_prodi(int $dikti, Request $request){

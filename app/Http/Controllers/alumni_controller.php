@@ -7,13 +7,20 @@ use App\Models\wisuda_status_alumni;
 
 class alumni_controller extends Controller
 {
-    public function status_alumni(){
+    public function status_alumni(Request $request){
         $alumni = wisuda_status_alumni::all();
-        return view('status_alumni', compact('alumni'));
+        $acc_name = $request->user()->name;
+        $acc_email = $request->user()->email;
+        $role_name = $request->user()->getRoleNames();
+        // dd($role_name[0]);
+        return view('status_alumni', compact('alumni', 'acc_name', 'acc_email', 'role_name'));
     }
 
-    public function tambah(){
-        return view('tambah_alumni');
+    public function tambah(Request $request){
+        $acc_name = $request->user()->name;
+        $acc_email = $request->user()->email;
+        $role_name = $request->user()->getRoleNames();
+        return view('tambah_alumni', compact('acc_name', 'acc_email', 'role_name'));
     }
 
     public function tambah_alumni(Request $request){
@@ -34,9 +41,12 @@ class alumni_controller extends Controller
        
     }
 
-    public function edit_alumni($idx){
+    public function edit_alumni($idx, Request $request){
+        $acc_name = $request->user()->name;
+        $acc_email = $request->user()->email;
+        $role_name = $request->user()->getRoleNames();
         $alumni = wisuda_status_alumni::where('idx', $idx)->get();
-        return view('edit_alumni', compact('alumni'));
+        return view('edit_alumni', compact('alumni', 'acc_name', 'acc_email', 'role_name'));
        
     }
 
