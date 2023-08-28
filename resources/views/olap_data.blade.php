@@ -182,6 +182,13 @@
                             <i class="fa fa-users"></i> <span>Data Wisudawan</span>
                         </a>
                     </li>
+                    @can('create role')
+                    <li class="treeview">
+                        <a href="/user-data">
+                            <i class="fa fa-user-plus"></i> <span>User</span>
+                        </a>
+                    </li>
+                    @endcan
                     <li class=" active treeview">
                         <a href="/olap-online">
                         <i class="fa fa-bar-chart"></i> <span>OLAP</span>

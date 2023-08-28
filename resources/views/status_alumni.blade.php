@@ -158,6 +158,13 @@
                             <i class="fa fa-users"></i> <span>Data Wisudawan</span>
                         </a>
                     </li>
+                    @can('create role')
+                    <li class="treeview">
+                        <a href="/user-data">
+                            <i class="fa fa-user-plus"></i> <span>User</span>
+                        </a>
+                    </li>
+                    @endcan
                     <li class="treeview">
                         <a href="/olap-online">
                         <i class="fa fa-bar-chart"></i> <span>OLAP</span>
@@ -211,14 +218,14 @@
                                 <div class="row">
                                     <div class="dataTables_wrapper">
                                         <table id="dtHorizontalVerticalExample"
-                                            class="table table-striped table-bordered table-sm display nowrap" cellspacing="0"
+                                            class="table table-striped table-bordered table-hover table-sm display nowrap" cellspacing="0"
                                             width="100%">
                                             <thead style="font-size: 14px">
                                                     <tr>
                                                         <th>Idx</th>
                                                         <th>ID Status</th>
                                                         <th>Status Alumni</th>
-                                                        <th>AKSI</th>
+                                                        <th>Action</th>
                                                     </tr>
                                                 </thead>
                                             <tbody style="font-size: 14px">

@@ -10,6 +10,7 @@ use App\Http\Controllers\wisudawan_controller;
 use App\Http\Controllers\home;
 use App\Http\Controllers\olap_online;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\user_controller;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,12 +24,20 @@ use App\Http\Controllers\AuthController;
 */
 
 // Main Route
-
 Route::get('/', [home::class, 'home']);
 Route::get('/welcome', [home::class, 'welcome']);
 Route::get('/login', [AuthController::class, 'login_form']);
 Route::post('/login', [AuthController::class, 'login']);
 Route::get('/logout', [AuthController::class, 'logout']);
+
+// User Route
+Route::get('/user-data', [user_controller::class, 'user'])->middleware('can:create role');
+Route::get('/user-data/add', [user_controller::class, 'tambah'])->middleware('can:create role');;
+Route::post('/user-data/add', [user_controller::class, 'tambah_user'])->middleware('can:create role');;
+Route::get('/user-data/edit/{id}', [user_controller::class, 'edit_user'])->middleware('can:update role');;
+Route::post('/user-data/update/{id}', [user_controller::class, 'update_user'])->middleware('can:update role');;
+Route::get('/user-data/delete/{id}', [user_controller::class, 'delete_user'])->middleware('can:delete role');;
+Route::post('/user-data/update/{id}', [user_controller::class, 'update_status'])->middleware('can:update role');;
 
 // Alumni Route
 Route::get('/status-alumni', [alumni_controller::class, 'status_alumni'])->middleware('can:read role');

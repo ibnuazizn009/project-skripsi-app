@@ -161,6 +161,13 @@
                             <i class="fa fa-users"></i> <span>Data Wisudawan</span>
                         </a>
                     </li>
+                    @can('create role')
+                    <li class="treeview">
+                        <a href="/user-data">
+                            <i class="fa fa-user-plus"></i> <span>User</span>
+                        </a>
+                    </li>
+                    @endcan
                     <li class="treeview">
                         <a href="/olap-online">
                         <i class="fa fa-bar-chart"></i> <span>OLAP</span>
@@ -241,7 +248,7 @@
                                                     <th>ID Domisili</th>
                                                     <th>ID Status</th>
                                                     <th>ID Pekerjaan</th>
-                                                    <th>AKSI</th>
+                                                    <th>Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody style="font-size: 14px">

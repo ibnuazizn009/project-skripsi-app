@@ -7,6 +7,7 @@ use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
 use DB;
 
 class UserRolePermissionSeeder extends Seeder
@@ -20,8 +21,8 @@ class UserRolePermissionSeeder extends Seeder
     {
         $default_user_value = [
             'email_verified_at' => now(),
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-            'remember_token' => Str::random(10),
+            'password' => Hash::make('uinsgd001'), // password
+            'remember_token' => Str::random(20),
         ];
         // $user = User::create([
         //     'name' => 'admin',
